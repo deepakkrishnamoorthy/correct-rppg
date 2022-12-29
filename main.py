@@ -308,7 +308,8 @@ def main_exp(dict_args=None):
         """""""""
         parser = argparse.ArgumentParser()
         # EXPERIMENTAL SETUP  
-        parser.add_argument('--use_wandb', type=int, choices=[0,1], default=1,required=False)        
+        parser.add_argument('--use_wandb', type=int, choices=[0,1], default=1,required=False)
+        parser.add_argument('--in_COLAB', type=int, choices=[0,1], default=1,required=True)
         parser.add_argument('--is_SWEEP', type=int, choices=[0,1], default=0, required=False) # Only for sweep hyperparameter tuning
         parser.add_argument('-ne', '--project_name', type=str, required=False)    
         parser.add_argument('-rn', '--run_name', type=str, required=False)
@@ -445,7 +446,7 @@ def main_exp(dict_args=None):
             print(f'=>[WARNING!] when using {args.network}, step_eval must be 1 because MTO. step_eval set to 1')
     else:
         args.is_from_rPPG = False
-    args.in_COLAB = os.path.isdir(r'/usr/local/lib/python3.7/dist-packages/google/cloud')
+    #args.in_COLAB = os.path.isdir(r'/usr/local/lib/python3.7/dist-packages/google/cloud')
     # Device configuration
     args.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
